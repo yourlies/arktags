@@ -86,6 +86,7 @@ export default {
       },
       textContent: '',
       inputStaff: '',
+      currentSpecialStaff: '',
     }
   },
   methods: {
@@ -300,8 +301,17 @@ export default {
         this.currentIndex = currentIndex;
       }
     },
-    filterSelectedStaff (staffName, currentIndex) {
+    filterSelectedStaff (staffName, currentIndex, force = false) {
       this.selected.display = [...this.selected.groups];
+      if (currentIndex != -1) {
+        this.inputStaff = '';
+        this.currentSpecialStaff = staffName;
+      }
+      if (this.currentIndex == currentIndex && currentIndex != -1 && !force) {
+        this.currentSpecialStaff = '';
+        this.currentIndex = 0;
+        return false;
+      }
       this.currentIndex = currentIndex;
       const res = [];
       for (let i = 0; i < this.selected.display.length; i++) {
@@ -332,9 +342,16 @@ export default {
       this.clearUnselectedTags();
       this.searchSelectedTags();
       this.searchSelectedTagsGroup();
-      this.sortSelectedGroup();
-
+      this.sortSelectedGroup();      
       this.selected.display = [...this.selected.groups];
+
+      if (this.currentIndex == -1) {
+        this.search();        
+      } else if (this.currentSpecialStaff != '') {
+        this.filterSelectedStaff(this.currentSpecialStaff, this.currentIndex, true);
+      } else {
+        this.currentIndex = 0;
+      }
     }
   },
   mounted () {
