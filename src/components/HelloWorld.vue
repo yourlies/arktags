@@ -278,6 +278,11 @@ export default {
       this.selected.groups = [...veryHigh, ...high, ...middle, ...normal, ...newhand];
     },
     filterSelectedGroup (conditions, currentIndex, onlyContion = false) {
+      if (this.currentIndex == -1) {
+        this.inputStaff = '';
+        this.currentSpecialStaff = '';
+        this.currentIndex = 0;
+      }
       this.selected.display = [...this.selected.groups];
       if (this.currentIndex == currentIndex) {
         this.currentIndex = 0;
