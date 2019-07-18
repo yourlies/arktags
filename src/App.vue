@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <HelloWorld />
+    <Tag />
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue';
+import Tag from './components/Tag';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Tag
   }
 }
 </script>
@@ -51,5 +52,18 @@ export default {
   }
   .pointer {
     cursor: pointer;
+  }
+
+  span {
+    background: #ddd;
+    display: inline-block;
+    margin: 5px;
+    padding: 7px 10px;
+    border-radius: 2px;
+    user-select: none;
+  }
+  .bcrRed {
+    background-color: #dc3545;
+    color: #fff;
   }
 </style>

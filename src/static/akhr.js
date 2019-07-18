@@ -63,14 +63,14 @@ Akhr.prototype.kinds = [
     id: 3,
     name: '种类',
     tags: [
-      { name: '先锋干员', isSelect: false, id: 7 },
-      { name: '狙击干员', isSelect: false, id: 8 },
-      { name: '医疗干员', isSelect: false, id: 9 },
-      { name: '术师干员', isSelect: false, id: 10 },
-      { name: '近卫干员', isSelect: false, id: 11 },
-      { name: '重装干员', isSelect: false, id: 12 },
-      { name: '辅助干员', isSelect: false, id: 13 },
-      { name: '特种干员', isSelect: false, id: 14 },
+      { name: '先锋', isSelect: false, id: 7 },
+      { name: '狙击', isSelect: false, id: 8 },
+      { name: '医疗', isSelect: false, id: 9 },
+      { name: '术师', isSelect: false, id: 10 },
+      { name: '近卫', isSelect: false, id: 11 },
+      { name: '重装', isSelect: false, id: 12 },
+      { name: '辅助', isSelect: false, id: 13 },
+      { name: '特种', isSelect: false, id: 14 },
     ]
   },
   {
