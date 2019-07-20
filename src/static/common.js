@@ -3,6 +3,15 @@ Func.arrangement = function (arr, pickNumber) {
   if (pickNumber >= arr.length) {
     return [arr];
   }
+  if (pickNumber == 0) {
+    const singleRes = [];
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr[i].length; j++) {
+        singleRes.push([[arr[i][j]]]);
+      }
+    }
+    return singleRes;
+  }
   const tempArr = [...arr];
   const resParam = tempArr.splice(0, pickNumber);
   const resArr = tempArr;

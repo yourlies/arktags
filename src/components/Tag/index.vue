@@ -8,7 +8,7 @@
 import Func from '../../static/common.js';
 import tags from '../../static/tags.json';
 import staffs from '../../static/staffs.json';
-import LeftBar from './LeftBar.vue';
+import LeftBar from './LeftBar';
 import RightBar from './RightBar.vue';
 
 export default {
