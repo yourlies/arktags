@@ -5,7 +5,7 @@
         <div class="cell">
           #Tags
           <span
-            v-for="(name, index) in group.names"
+            v-for="(name, index) in group.tagNames"
             :key="index">
             {{ name }}
           </span>

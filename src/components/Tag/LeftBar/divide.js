@@ -1,64 +1,45 @@
 import Func from '../../../static/common.js';
-import tags from '../../../static/tags.json';
-import groups from '../../../static/groups.json';
-import staffs from '../../../static/staffs.json';
 
-const Index = function (sets) {
-  this.rawSets = sets;
-  this.sets = [];
-  this.rawKinds = {};
+const Index = function (sets, hooks) {
+  this.hooks = hooks;
+  this.sets = sets;
   this.kinds = {};
-  this.arrangementNumberArr = [];
+  this.kindOrders = [];
 
-  this.tagIds = [];
+  this.rawOrders = [];
+  this.orders = [];
+  this.arrangementNumberArr = [];
+  this._spliceRawSets();
 };
+
+Index.prototype._spliceRawSets = function () {
+  for (let i = 0; i < this.sets.length; i++) {
+    if (typeof this.hooks.splice == 'function') {
+      this.hooks.splice(this.sets[i]);
+    }
+    const { id, kindId } = this.sets[i];
+    this.kinds[`k${kindId}`] = this.kinds[`k${kindId}`] || [];
+    this.kinds[`k${kindId}`].push(id);
+  }
+}
 
 Index.prototype.setArrangementNumberArr = function (numberArr) {
   this.arrangementNumberArr = numberArr;
 }
 
-Index.prototype._filterKindOrder = function (kindOrder) {
-  let staffs = groups[kindOrder[0]];
-  let index = 1;
-  while (index < kindOrder.length) {
-    const res = [];
-    for (let i = 0; i < staffs.length; i++) {
-      if (groups[kindOrder[index]].indexOf(staffs[i]) !== -1) {
-        res.push(staffs[i]);
-      }
-    }
-    staffs = res;
-    index++;
-  }
-  return staffs;
-};
-
-Index.prototype.spliceRawSets = function () {
-  for (let i = 0; i < this.rawSets.length; i++) {
-    const tagId = this.rawSets[i].id;
-    this.tagIds.push(tagId);
-    const kindId = tags[tagId].kindId;
-    this.rawKinds[`k${kindId}`] = this.rawKinds[`k${kindId}`] || [];
-    this.rawKinds[`k${kindId}`].push(tagId);
-  }
-  this.kinds = { ...this.rawKinds };
-}
-
 Index.prototype.divides = function () {
-  this.spliceRawSets();
-  const kindsValues = Object.values(this.rawKinds);
+  const kindsValues = Object.values(this.kinds);
   for (let i = 0; i < this.arrangementNumberArr.length; i++) {
     const number = this.arrangementNumberArr[i];
-    const sets = this.divide(kindsValues, number);
+    const kindOrders = this.divide(kindsValues, number);
     if (kindsValues.length > number - 1) {
-      this.sets = this.sets.concat(sets);
+      this.kindOrders = this.kindOrders.concat(kindOrders);
     }
   }
-  this.results = [];
-  this.rawDivides = [];
-  for (let i = 0; i < this.sets.length; i++) {
-    const divides = Func.combination(this.sets[i]);
-    this.rawDivides = this.rawDivides.concat(divides);
+
+  for (let i = 0; i < this.kindOrders.length; i++) {
+    const divides = Func.combination(this.kindOrders[i]);
+    this.rawOrders = this.rawOrders.concat(divides);
   }
 }
 
@@ -68,12 +49,18 @@ Index.prototype.divide = function (kindsValues, number) {
   }
 }
 
-Index.prototype.run = function () {
-  for (let j = 0; j < this.rawDivides.length; j++) {
-    const divideIds = this.rawDivides[j];
-    const results = this._filterKindOrder(divideIds);
-    if (results.length > 0) {
-      this.results.push({ ids: divideIds, results })
+Index.prototype.render = function () {
+  if (typeof this.hooks.beforeMount == 'function') {
+    this.beforeMount = this.hooks.beforeMount;
+    this.beforeMount();
+  }
+  for (let j = 0; j < this.rawOrders.length; j++) {
+    const ids = this.rawOrders[j];
+
+    if (typeof this.hooks.mount == 'function') {
+      this.mount = this.hooks.mount;
+      const sets = this.mount(ids);
+      this.orders.push({ ids, sets });
     }
   }
 }

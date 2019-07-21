@@ -15,7 +15,7 @@
         @click="addLimitation(0, 1, [1])"
         :class="['pointer', currentIndex == 0 ? 'selected' : '']">赌小车</span>
       <span
-        @click="addLimitation(1, 2, [1, 2, 3])"
+        @click="addLimitation(1, 2, [3])"
         :class="['pointer', currentIndex == 1 ? 'selected' : '']">保底</span>
     </li>
     <li class="box">
@@ -95,28 +95,30 @@ export default {
       }
       const rawGroups = [...this.selectedGroups];
       const filteredGroups = [];
+      const { containLevels, notContainLevels, id } = this.limitation;
       for (let i = 0; i < rawGroups.length; i++) {
         const group = rawGroups[i];
-        for (let j = 0; j < group.staffs.length; j++) {
-          const level = this.staffs[group.staffs[j]].level;
-          if (this.limitType == 1) {
-            const staffId = staffs[j];
-            if (this.limitation.containLevels.indexOf(level) !== -1) {
-              filteredGroups.push(rawGroups[i]);
-              continue;
+        if (this.limitType == 1) {
+          for (let j = 0; j < containLevels.length; j++) {
+            if (group.levels.indexOf(containLevels[j]) !== -1) {
+              filteredGroups.push(group);
+              break;              
             }
           }
-          if (this.limitType == 2) {
-            if (this.limitation.notContainLevels.indexOf(level) == -1) {
+        }
+        if (this.limitType == 2) {
+          for (let j = 0; j < notContainLevels.length; j++) {
+            if (group.levels.indexOf(notContainLevels[j]) !== -1) {              
+              break;              
+            }
+            if (j == notContainLevels.length - 1) {
               filteredGroups.push(rawGroups[i]);
             }
-            break;
           }
-          if (this.limitType == 0) {
-            if (group.staffs.indexOf(this.limitation.id) !== -1) {
-              filteredGroups.push(rawGroups[i]);
-            }
-            break;
+        }
+        if (this.limitType == 0) {
+          if (group.ids.indexOf(id) !== -1) {
+            filteredGroups.push(rawGroups[i]);
           }
         }
       }

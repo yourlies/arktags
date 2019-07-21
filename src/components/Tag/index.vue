@@ -77,11 +77,11 @@ export default {
       const displayGroups = [];
       for (let i = 0; i < this.selectedGroups.length; i++) {
         const group = this.selectedGroups[i];
-        const isRare = (group.ids.indexOf(this.rareId) !== -1);
-        displayGroups[i] = { names: [], staffs: [] };
-        for (let j = 0; j < group.ids.length; j++) {
-          const id = group.ids[j];
-          displayGroups[i].names.push(this.tags[id].name);
+        const isRare = (group.tagIds.indexOf(this.rareId) !== -1);
+        displayGroups[i] = { tagNames: [], staffs: [] };
+        for (let j = 0; j < group.tagIds.length; j++) {
+          const id = group.tagIds[j];
+          displayGroups[i].tagNames.push(this.tags[id].name);
         }
         for (let j = 0; j < group.staffs.length; j++) {
           const staffId = group.staffs[j];

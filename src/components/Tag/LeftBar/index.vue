@@ -48,9 +48,6 @@ export default {
     background: #eee;
     padding: 10px 20px;
     padding-bottom: 15px;
-    border-radius: 5px;
-    vertical-align: top;
-    border: 4px solid #eaeaea;
     border-left: 5px solid #ddd;
     display: inline-block;
   }

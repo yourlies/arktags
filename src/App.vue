@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
 import Tag from './components/Tag';
 
 export default {
