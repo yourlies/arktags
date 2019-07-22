@@ -237,6 +237,9 @@ export default {
   @media screen and (max-width: 1000px) {
     .section {
       top: 0;
+      left: 0;
+      padding: 20px;
+      padding-top: 50px;
       position: fixed;
       width: 100%;
       height: 100%;
@@ -256,7 +259,7 @@ export default {
   }
   .float-span {
     left: 30px;
-    bottom: 150px;
+    bottom: 100px;
     position: fixed;
     padding: 21px 15px;
     border-radius: 50px;
