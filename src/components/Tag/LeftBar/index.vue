@@ -1,15 +1,25 @@
 <template>
-  <div class="contain">
-    <TagSearch
-      @filterGroups="filterGroups"
-      :selectedGroups="selectedGroups"
-      :clearCount="clearCount"
-      :eventCount="eventCount">
-      <span class="pointer bcrRed" @click="clear">清空</span>
-    </TagSearch>
-    <TagSelect
-      @selectGroups="selectGroups"
-      :clearCount="clearCount"/>
+  <div style="display: inline-block;">
+    <div class="contain" v-show="screenMode == 0">
+      <TagSearch
+        @filterGroups="filterGroups"
+        :selectedGroups="selectedGroups"
+        :screenMode="screenMode"
+        :clearCount="clearCount"
+        :eventCount="eventCount">
+        <span class="pointer bcrRed" @click="clear">清空</span>
+      </TagSearch>
+      <TagSelect
+        @selectGroups="selectGroups"
+        :screenMode="screenMode"
+        :clearCount="clearCount"/>
+    </div>
+    <div v-show="screenMode == 1">
+      <TagSelect
+        @selectGroups="selectGroups"
+        :screenMode="screenMode"
+        :clearCount="clearCount"/>
+    </div>
   </div>
 </template>
 <script>
@@ -22,6 +32,7 @@ export default {
       selectedGroups: [],
       eventCount: 0,
       clearCount: 0,
+      screenMode: 0,
     }
   },
   components: {
@@ -41,29 +52,49 @@ export default {
       this.$emit('selected', filteredGroups);
     },
   },
+  mounted () {
+    switch (true) {
+        case window.innerWidth < 1000:
+          this.screenMode = 1;
+          break;
+        case window.innerWidth >= 1000:
+          this.screenMode = 0;
+          break;
+        default:
+          break;
+        }
+    window.onresize = () => {
+      switch (true) {
+        case window.innerWidth < 1000:
+          this.screenMode = 1;
+          break;
+        case window.innerWidth >= 1000:
+          this.screenMode = 0;
+          break;
+        default:
+          break; 
+      }
+    }
+  }
 }
 </script>
 <style scoped>
-  .contain {
-    background: #eee;
-    padding: 10px 20px;
-    padding-bottom: 15px;
-    border-left: 5px solid #ddd;
-    display: inline-block;
+  @media screen and (max-width: 1000px) {
+    .contain {
+      background: #eee;
+      padding: 10px 20px;
+      padding-bottom: 15px;
+      border-left: 5px solid #ddd;
+      margin-bottom: 10px;
+    }
   }
-  .section span {
-    padding: 5px 10px;
-    border: 2px solid #d9d9d9;
-  }
-
-  .section span.selected {
-    background: #007bff;
-    color: #fff;
-  }
-
-  .box .inner {
-    border-bottom: 1px dashed #999;
-    margin-bottom: 5px;
-    width: 330px;
+  @media screen and (min-width: 1000px) {
+    .contain {
+      background: #eee;
+      padding: 10px 20px;
+      padding-bottom: 15px;
+      border-left: 5px solid #ddd;
+      display: inline-block;
+    }
   }
 </style>

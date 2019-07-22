@@ -10,7 +10,7 @@
             {{ name }}
           </span>
           </div>
-          <div>
+        <div class="inner">
           <span
             :class="`level-${staff.level}`"
             v-for="(staff, index) in group.staffs">
@@ -29,12 +29,15 @@ export default {
 }
 </script>
 <style>
-  .rightBar {
-    display: inline-block;
-    width: 595px;
-    margin-left: 20px;
-    vertical-align: top;
+  @media screen and (min-width: 1000px) {
+    .rightBar {
+      display: inline-block;
+      width: 595px;
+      margin-left: 20px;
+      vertical-align: top;
+    }
   }
+
   .rightBar .box {
     border-left: 5px solid #ddd;
     margin-bottom: 25px;
@@ -67,5 +70,14 @@ export default {
   }
   .level-2 {
     background-color: #ccc;
+  }
+  @media screen and (max-width: 1000px) {
+    .rightBar .cell {
+      padding: 5px 7px;
+      /*font-size: 15px;*/
+    }
+    .rightBar .inner span {
+      /*padding: 7px 10px;*/
+    }
   }
 </style>

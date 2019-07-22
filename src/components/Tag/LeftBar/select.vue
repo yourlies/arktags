@@ -1,19 +1,39 @@
 <template>
-  <ul class="section">
-    <li class="box">
-      <div :key="index" class="df" v-for="(kind, index) in kinds">
-        <div class="inner">
-          <span
-            @click="selectTag(tag)"
-            v-for="(tag, index) in kind"
-            :key="index"
-            :class="['unified', 'pointer', tag.isSelect ? 'selected' : '']">
-            {{ tag.name }}
-          </span>
+  <div>
+    <ul class="section" v-show="screenMode == 0">
+      <li class="box">
+        <div :key="index" class="df" v-for="(kind, index) in kinds">
+          <div class="inner">
+            <span
+              @click="selectTag(tag)"
+              v-for="(tag, index) in kind"
+              :key="index"
+              :class="['unified', 'pointer', tag.isSelect ? 'selected' : '']">
+              {{ tag.name }}
+            </span>
+          </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+    <span class="float-span"
+      @click="switchSelect"
+      v-show="screenMode == 1">标签</span>
+    <ul class="section" v-show="screenMode == 1 && switchMode == 1">
+      <li class="box">
+        <div :key="index" class="df" v-for="(kind, index) in kinds">
+          <div class="inner">
+            <span
+              @click="selectTag(tag)"
+              v-for="(tag, index) in kind"
+              :key="index"
+              :class="['unified', 'pointer', tag.isSelect ? 'selected' : '']">
+              {{ tag.name }}
+            </span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 <script>
 import Func from '../../../static/common.js';
@@ -26,6 +46,7 @@ export default {
   data () {
     return {
       rareId: 2,
+      switchMode: 0,
       staffs: Staffs,
       kinds: [
         [
@@ -70,7 +91,7 @@ export default {
       selectedTags: [],
     }
   },
-  props: ['clearCount'],
+  props: ['clearCount', 'screenMode'],
   methods: {
     clear () {
       this.unSelectedTags();
@@ -192,6 +213,9 @@ export default {
       this.clearUnSelectedTags();
       this.divideGroups();
       this.$emit('selectGroups', this.selectedGroups);
+    },
+    switchSelect () {
+      this.switchMode = this.switchMode == 1 ? 0 : 1;
     }
   },
   watch: {
@@ -206,15 +230,37 @@ export default {
     padding: 5px 10px;
     border: 2px solid #d9d9d9;
   }
-
   .section span.selected {
     background: #007bff;
     color: #fff;
   }
-
-  .box .inner {
-    border-bottom: 2px dashed #ccc;
-    margin-bottom: 5px;
-    width: 330px;
+  @media screen and (max-width: 1000px) {
+    .section {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      z-index: 0;
+    }
+    .section span {
+      margin: 10px 5px;
+    }
+  }
+  @media screen and (min-width: 1000px) {
+    .box .inner {
+      border-bottom: 2px dashed #ccc;
+      margin-bottom: 5px;
+      width: 330px;
+    }
+  }
+  .float-span {
+    left: 30px;
+    bottom: 150px;
+    position: fixed;
+    padding: 21px 15px;
+    border-radius: 50px;
+    border-bottom: 2px solid #ccc;
+    border-left: 3px solid #ccc;
+    z-index: 1;
   }
 </style>

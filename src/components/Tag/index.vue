@@ -100,13 +100,23 @@ export default {
       this.filterSelectedGroups();
       this.sortSelectedGroups();
   	}
+  },
+  mounted () {
+    
   }
 }
 </script>
 <style scoped>
-  .container {
-    padding-top: 30px;
-    width: 1000px;
-    margin: auto;
+  @media screen and (max-width: 1000px) {
+    .container {
+      padding: 15px;
+    }
+  }
+  @media screen and (min-width: 1000px) {
+    .container {
+      padding-top: 30px;
+      width: 1000px;
+      margin: auto;
+    }
   }
 </style>

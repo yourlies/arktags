@@ -1,5 +1,5 @@
 <template>
-  <ul class="section">
+  <ul class="section" v-show="screenMode == 0">
     <li class="box">
       <slot></slot>
       <input
@@ -45,7 +45,7 @@ export default {
       staffs
     }
   },
-  props: ['selectedGroups', 'eventCount', 'clearCount'],
+  props: ['selectedGroups', 'eventCount', 'clearCount', 'screenMode'],
   methods: {
     clear() {
       this.clearLimitation();
