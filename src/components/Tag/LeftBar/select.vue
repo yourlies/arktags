@@ -236,6 +236,7 @@ export default {
   }
   @media screen and (max-width: 1000px) {
     .section {
+      top: 0;
       position: fixed;
       width: 100%;
       height: 100%;
