@@ -244,6 +244,7 @@ export default {
       width: 100%;
       height: 100%;
       background-color: #fff;
+      box-sizing: border-box;
       z-index: 0;
     }
     .section span {
