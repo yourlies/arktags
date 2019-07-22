@@ -260,7 +260,7 @@ export default {
   }
   .float-span {
     left: 30px;
-    bottom: 100px;
+    bottom: 70px;
     position: fixed;
     padding: 21px 15px;
     border-radius: 50px;
