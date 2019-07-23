@@ -15,9 +15,27 @@
         </div>
       </li>
     </ul>
+    <header v-show="screenMode == 1">
+      公开招募计算器手机版
+      <span @click="switchSelect(2)">使用说明</span>
+    </header>
     <span class="float-span"
       @click="switchSelect"
       v-show="screenMode == 1">标签</span>
+    <ul class="section copyright" v-show="screenMode == 1 && switchMode == 2">
+      <li class="box title">
+        手机版使用说明
+      </li>
+      <li class="box">
+        点击标签按钮，切换标签选择页面，与筛选结果页面
+      </li>
+      <li class="box">
+        双击筛选结果，可以过滤所有非保底tag组合(<s>开发中，咕咕咕</s>)
+      </li>
+      <li class="box">
+        作者联系方式(qq)：958142428
+      </li>
+    </ul>
     <ul class="section" v-show="screenMode == 1 && switchMode == 1">
       <li class="box">
         <div :key="index" class="df" v-for="(kind, index) in kinds">
@@ -46,7 +64,7 @@ export default {
   data () {
     return {
       rareId: 2,
-      switchMode: 0,
+      switchMode: 2,
       staffs: Staffs,
       kinds: [
         [
@@ -214,8 +232,12 @@ export default {
       this.divideGroups();
       this.$emit('selectGroups', this.selectedGroups);
     },
-    switchSelect () {
-      this.switchMode = this.switchMode == 1 ? 0 : 1;
+    switchSelect (switchMode) {
+      if (typeof switchMode == 'number') {
+        this.switchMode = switchMode;
+      } else {
+        this.switchMode = this.switchMode == 1 ? 0 : 1;        
+      }
     }
   },
   watch: {
@@ -239,7 +261,7 @@ export default {
       top: 0;
       left: 0;
       padding: 20px;
-      padding-top: 50px;
+      padding-top: 70px;
       position: fixed;
       width: 100%;
       height: 100%;
@@ -249,6 +271,42 @@ export default {
     }
     .section span {
       margin: 10px 5px;
+    }
+
+    .section.copyright {
+      padding-top: 80px;
+    }
+    .section.copyright .box.title {
+      border: 0;
+      padding: 10px;
+      background-color: #fff;
+    }
+    .section.copyright .box {
+      display: inline-block;
+      border-left: 3px solid #ccc;
+      margin-bottom: 20px;
+      color: #333;
+      padding: 10px;
+      background-color: #eee;
+    }
+
+    header {
+      left: 0;
+      top: 0;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 14px;
+      padding-left: 20px;
+      position: fixed;
+      background-color: #666;
+      box-shadow: 1px 1px 3px #888;
+      color: #fff;
+      z-index: 2;
+    }
+    header span {
+      background-color: #ccc;
+      padding: 3px 7px;
+      margin-left: 50px;
     }
   }
   @media screen and (min-width: 1000px) {

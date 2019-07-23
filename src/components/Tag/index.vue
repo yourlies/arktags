@@ -110,6 +110,7 @@ export default {
   @media screen and (max-width: 1000px) {
     .container {
       padding: 15px;
+      padding-top: 60px;
     }
   }
   @media screen and (min-width: 1000px) {
