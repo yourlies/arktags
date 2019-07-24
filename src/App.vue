@@ -25,6 +25,9 @@ export default {
   .df.center {
     align-items: center;
   }
+  .pointer {
+    cursor: pointer;
+  }
   ul {
     margin: 0;
     padding: 0;
