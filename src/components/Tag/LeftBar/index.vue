@@ -1,100 +1,64 @@
 <template>
-  <div style="display: inline-block;">
-    <div class="contain" v-show="screenMode == 0">
-      <TagSearch
-        @filterGroups="filterGroups"
-        :selectedGroups="selectedGroups"
-        :screenMode="screenMode"
-        :clearCount="clearCount"
-        :eventCount="eventCount">
-        <span class="pointer bcrRed" @click="clear">清空</span>
-      </TagSearch>
-      <TagSelect
-        @selectGroups="selectGroups"
-        :screenMode="screenMode"
-        :clearCount="clearCount"/>
-    </div>
-    <div v-show="screenMode == 1">
-      <TagSelect
-        @selectGroups="selectGroups"
-        :screenMode="screenMode"
-        :clearCount="clearCount"/>
-    </div>
+  <div class="content">
+    <TagSearch />
+    <TagSelect :clearCount="clearCount" />
   </div>
 </template>
 <script>
-import TagSelect from './select.vue';
+import tags from '../../../static/tags.json';
+import staffs from '../../../static/staffs.json';
+import processor from './processor';
+
+import { mapState } from 'vuex';
+import TagSelect from './select';
 import TagSearch from './search.vue';
 
 export default {
   data () {
-    return {
-      selectedGroups: [],
-      eventCount: 0,
+  	return {
+      staffs, tags,
       clearCount: 0,
-      screenMode: 0,
-    }
+      groups: {
+      	raw: [], filtered: [], sorted: [], limited: [],
+      },
+  	}
   },
+  computed: mapState({
+  	group: (state) => state.group,
+    filter: (state) => state.filter,
+  }),
   components: {
     TagSelect, TagSearch
   },
   methods: {
-    clear() {
-      this.clearCount++;
-      this.selectedGroups = [];
-      this.$emit('selected', []);
-    },
-    selectGroups (selectedGroups) {
-      this.selectedGroups = selectedGroups;
-      this.eventCount++;
-    },
-    filterGroups (filteredGroups) {
-      this.$emit('selected', filteredGroups);
-    },
+    limitGroups: processor.limit,
+  	sortGroups: processor.sort,
+    filterGroups: processor.filter,
   },
-  mounted () {
-    switch (true) {
-        case window.innerWidth < 1000:
-          this.screenMode = 1;
-          break;
-        case window.innerWidth >= 1000:
-          this.screenMode = 0;
-          break;
-        default:
-          break;
-        }
-    window.onresize = () => {
-      switch (true) {
-        case window.innerWidth < 1000:
-          this.screenMode = 1;
-          break;
-        case window.innerWidth >= 1000:
-          this.screenMode = 0;
-          break;
-        default:
-          break; 
+  watch: {
+  	'group.count' () {
+      if (this.group.type === -1) {
+        this.clearCount++;
+        this.$store.commit('group/recover');
+        return false;
       }
+
+  	  this.groups.raw = this.group.content;
+  	  this.filterGroups();
+  	  this.sortGroups();
+
+      this.limitGroups();
+  	  this.$emit('select', this.groups.limited);
+  	},
+    'filter.count' () {
+      this.limitGroups();
+      this.$emit('select', this.groups.limited);
     }
   }
 }
 </script>
 <style scoped>
-  @media screen and (max-width: 1000px) {
-    .contain {
-      background: #eee;
-      padding: 10px 20px;
-      padding-bottom: 15px;
-      border-left: 5px solid #ddd;
-      margin-bottom: 10px;
-    }
-  }
-  @media screen and (min-width: 1000px) {
-    .contain {
-      background: #eee;
-      padding: 10px 20px;
-      padding-bottom: 15px;
-      border-left: 5px solid #ddd;
-      display: inline-block;
-    }
+  .content {
+    display: inline-block;
   }
 </style>

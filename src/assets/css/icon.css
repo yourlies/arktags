@@ -1,0 +1,58 @@
+.icon {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  background-size: 36px;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: .8;
+}
+.i-vanguard {
+  background-image: url('../images/vanguard.jpg');
+}
+.i-medic {
+  background-image: url('../images/medic.jpg');
+}
+.i-guard {
+  background-image: url('../images/guard.jpg');
+}
+.i-sniper {
+  background-image: url('../images/sniper.jpg');
+}
+.i-specialist {
+  background-image: url('../images/specialist.jpg');
+}
+.i-defender {
+  background-image: url('../images/defender.jpg');
+}
+.i-caster {
+  background-image: url('../images/caster.jpg');
+}
+.i-supporter {
+  background-image: url('../images/supporter.jpg');
+}
+.i-vanguard-dark {
+  background-image: url('../images/vanguard_dark.jpg');
+}
+.i-medic-dark {
+  background-image: url('../images/medic_dark.jpg');
+}
+.i-guard-dark {
+  background-image: url('../images/guard_dark.jpg');
+}
+.i-sniper-dark {
+  background-image: url('../images/sniper_dark.jpg');
+}
+.i-specialist-dark {
+  background-image: url('../images/specialist_dark.jpg');
+}
+.i-defender-dark {
+  background-image: url('../images/defender_dark.jpg');
+}
+.i-caster-dark {
+  background-image: url('../images/caster_dark.jpg');
+}
+.i-supporter-dark {
+  background-image: url('../images/supporter_dark.jpg');
+}

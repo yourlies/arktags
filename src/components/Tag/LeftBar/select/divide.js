@@ -1,4 +1,4 @@
-import Func from '../../../static/common.js';
+import Func from '../../../../static/common.js';
 
 const Index = function (sets, hooks) {
   this.hooks = hooks;

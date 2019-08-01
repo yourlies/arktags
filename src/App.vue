@@ -11,10 +11,35 @@ export default {
   name: 'app',
   components: {
     Tag
+  },
+  mounted () {
+    switch (true) {
+        case window.innerWidth < 1000:
+          this.screenMode = 1;
+          break;
+        case window.innerWidth >= 1000:
+          this.screenMode = 0;
+          break;
+        default:
+          break;
+        }
+    window.onresize = () => {
+      switch (true) {
+        case window.innerWidth < 1000:
+          this.screenMode = 1;
+          break;
+        case window.innerWidth >= 1000:
+          this.screenMode = 0;
+          break;
+        default:
+          break; 
+      }
+    }
   }
 }
 </script>
 <style>
+  @import './assets/css/icon.css';
   body {
     margin: 0;
     padding: 0;
@@ -25,9 +50,6 @@ export default {
   .df.center {
     align-items: center;
   }
-  .pointer {
-    cursor: pointer;
-  }
   ul {
     margin: 0;
     padding: 0;
@@ -37,25 +59,10 @@ export default {
     padding: 0;
     list-style: none;
   }
-  .dib {
-    display: inline-block;
-  }
-  .tc {
-    text-align: center;
-  }
-  .min25 {
-    min-width: 25px;
-  }
-  .min60 {
-    min-width: 60px;
-  }
-  .max300 {
-    max-width: 300px;
-  }
   .pointer {
     cursor: pointer;
+    user-select: none;
   }
-
   span {
     background: #ddd;
     display: inline-block;
@@ -63,9 +70,5 @@ export default {
     padding: 7px 10px;
     border-radius: 2px;
     user-select: none;
-  }
-  .bcrRed {
-    background-color: #dc3545;
-    color: #fff;
   }
 </style>

@@ -1,39 +1,37 @@
 <template>
   <ul class="rightBar">
-    <li>
-      <div
-        :ref="`g${groupIndex}`"
-        :class="['box', group.isTag ? 'reverse' : '']"
-        v-for="(group, groupIndex) in groups">
-        <div class="cell" v-if="!group.isTag">
-          #Tags
-          <span
-            v-for="(name, index) in group.tagNames"
-            :key="index">
-            {{ name }}
-          </span>
-          </div>
-        <div class="inner" v-if="!group.isTag">
-          <span
-            @click="animate(groupIndex, staff.id)"
-            :class="[`level-${staff.level}`, 'pointer']"
-            v-for="(staff, index) in group.staffs">
-            {{ staff.level == 1 ? '*' : '' }} {{ staff.name }}
-          </span>
+    <li><slot></slot></li>
+    <li
+      :ref="`g${groupIndex}`"
+      :class="['box', group.isTag ? 'reverse' : '']"
+      v-for="(group, groupIndex) in groups">
+      <div class="cell" v-if="!group.isTag">
+        #Tags
+        <span
+          v-for="(name, index) in group.tagNames"
+          :key="index">
+          {{ name }}
+        </span>
         </div>
-
-        <div class="cell reverse pointer"
-          v-if="group.isTag"
-          @click="animateReverse(groupIndex)">
-          #Name &nbsp;&nbsp;&nbsp;{{ group.name }}
-        </div>
-        <div class="inner reverse pointer"
-          v-if="group.isTag"
-          @click="animateReverse(groupIndex)">
-          <span v-for="(tag, index) in group.tags">
-            {{ tag.name }}
-          </span>
-        </div>
+      <div class="inner" v-if="!group.isTag">
+        <span
+          @click="animate(groupIndex, staff.id)"
+          :class="[`level-${staff.level}`, 'pointer']"
+          v-for="(staff, index) in group.staffs">
+          {{ staff.level == 1 ? '*' : '' }} {{ staff.name }}
+        </span>
+      </div>
+      <div class="cell reverse pointer"
+        v-if="group.isTag"
+        @click="animateReverse(groupIndex)">
+        #Name &nbsp;&nbsp;&nbsp;{{ group.name }}
+      </div>
+      <div class="inner reverse pointer"
+        v-if="group.isTag"
+        @click="animateReverse(groupIndex)">
+        <span v-for="(tag, index) in group.tags">
+          {{ tag.name }}
+        </span>
       </div>
     </li>
   </ul>
@@ -103,48 +101,49 @@ export default {
   },
 }
 </script>
-<style>
-  @media screen and (min-width: 1000px) {
-    .rightBar {
-      display: inline-block;
-      width: 595px;
-      margin-left: 20px;
-      vertical-align: top;
-    }
+<style scoped>
+  .rightBar {
+    display: inline-block;
+    width: 595px;
+    margin-left: 20px;
+    vertical-align: top;
   }
 
-  .rightBar .reverse.box {
+  .reverse.box {
     border-left: 5px solid #333;
   }
-  .rightBar .reverse.cell {
+  .reverse.cell {
     box-shadow: 2px 2px 2px #888;
     color: #fff;
     background-color: #333;
     padding: 15px;
   }
-  .rightBar .reverse.inner {
+  .reverse.inner {
     box-sizing: border-box;
     margin-left: 5px;
     border-bottom: 2px dashed #333;
     padding: 5px 0;
   }
-  .rightBar .reverse.inner span {
+  .reverse.inner span {
     box-shadow: 2px 2px 2px #888;
     background-color: #333;
     color: #fff;
   }
 
-  .rightBar .box {
+  .box {
     border-left: 5px solid #ddd;
     margin-bottom: 25px;
   }
-  .rightBar .cell {
+  .cell {
+    border-radius: 3px;
     background: #ddd;
+    box-shadow: 3px 3px 3px #cacaca;
     margin-left: 5px;
+    margin-bottom: 6px;
     padding: 7px 0;
     padding-left: 16px;
   }
-  .rightBar .cell span {
+  .cell span {
     padding: 0;
     padding-bottom: 2px;
     border-bottom: 1px dashed #666;
@@ -168,7 +167,7 @@ export default {
     background-color: #ccc;
   }
   @media screen and (max-width: 1000px) {
-    .rightBar .cell {
+    .cell {
       padding: 5px 7px;
     }
   }
