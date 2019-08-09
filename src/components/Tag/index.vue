@@ -1,13 +1,16 @@
 <template>
   <div class="container">
+    <TagSearch class="tag-search" v-show="screenMode == 1" />
   	<LeftBar @select="handle" />
   	<RightBar :groups="groups">
-      <Infotip />
+      <Infotip v-show="screenMode == 0" />
     </RightBar>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
 import Infotip from './Infotip.vue';
+import TagSearch from './LeftBar/search.vue';
 import LeftBar from './LeftBar';
 import RightBar from './RightBar.vue';
 
@@ -17,8 +20,11 @@ export default {
       groups: [],
   	}
   },
+  computed: mapState({
+    screenMode: (state) => state.common.screenMode,
+  }),
   components: {
-  	LeftBar, RightBar, Infotip,
+  	LeftBar, RightBar, Infotip, TagSearch
   },
   methods: {
   	handle (groups) {
@@ -37,8 +43,8 @@ export default {
 <style scoped>
   @media screen and (max-width: 1000px) {
     .container {
-      padding: 15px;
-      padding-top: 60px;
+      padding: 0;
+      padding-top: 0;
     }
   }
   @media screen and (min-width: 1000px) {

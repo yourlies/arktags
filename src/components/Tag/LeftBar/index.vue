@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <TagSearch />
+    <TagSearch v-show="screenMode == 0" />
     <TagSelect :clearCount="clearCount" />
   </div>
 </template>
@@ -26,6 +26,7 @@ export default {
   computed: mapState({
   	group: (state) => state.group,
     filter: (state) => state.filter,
+    screenMode: (state) => state.common.screenMode,
   }),
   components: {
     TagSelect, TagSearch
@@ -58,7 +59,9 @@ export default {
 }
 </script>
 <style scoped>
-  .content {
-    display: inline-block;
+  @media screen and (min-width: 1000px) {
+    .content {
+      display: inline-block;
+    }
   }
 </style>

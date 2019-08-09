@@ -103,12 +103,9 @@ export default {
 </script>
 <style scoped>
   .rightBar {
-    display: inline-block;
-    width: 595px;
     margin-left: 20px;
     vertical-align: top;
   }
-
   .reverse.box {
     border-left: 5px solid #333;
   }
@@ -129,15 +126,9 @@ export default {
     background-color: #333;
     color: #fff;
   }
-
-  .box {
-    border-left: 5px solid #ddd;
-    margin-bottom: 25px;
-  }
   .cell {
     border-radius: 3px;
     background: #ddd;
-    box-shadow: 3px 3px 3px #cacaca;
     margin-left: 5px;
     margin-bottom: 6px;
     padding: 7px 0;
@@ -167,8 +158,33 @@ export default {
     background-color: #ccc;
   }
   @media screen and (max-width: 1000px) {
+    .rightBar {
+      margin: 0;
+    }
+    .box {
+      padding-bottom: 10px;
+    }
     .cell {
+      margin-left: 0;
+      border-radius: 0;
       padding: 5px 7px;
+      border-left: 5px solid #cacaca;
+    }
+    .inner {
+      padding-left: 5px;
+    }
+  }
+  @media screen and (min-width: 1000px) {
+    .rightBar {
+      display: inline-block;
+      width: 595px;
+    }
+    .box {
+      border-left: 5px solid #ddd;
+      margin-bottom: 25px;
+    }
+    .cell {
+      box-shadow: 3px 3px 3px #cacaca;
     }
   }
 </style>

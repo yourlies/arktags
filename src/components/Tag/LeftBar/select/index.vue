@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="section" @click="gestures">
-      <li class="box df title">
+      <li class="box title">
         <div
           class="pointer cell"
           v-for="(career, index) in careers"
@@ -141,39 +141,56 @@ export default {
 }
 </script>
 <style scoped>
-  @media screen and (min-width: 1000px) {
+  .box {
+    user-select: none;
+  }
+  .box.title .cell .shadow {
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 4px;
+    background-color: #cd5c5c;
+    height: 40px;
+    width: 40px;
+    z-index: 1;
+    opacity: .5;
+  }
+  .box i.icon {
+    margin: 3px;
+    padding: 2px;
+    border: 1px dashed #888;
+  }
+  .box span {
+    border: 0;
+    padding: 5px;
+    margin: 2px 5px;
+    border-bottom: 1px dashed #888;
+    border-radius: 0;
+    background-color: #fff;
+  }
+  .box span.selected {
+    color: #007bff;
+  }
+  .box .cell {
+    display: inline-block;
+  }
+  .box .inner {
+    margin-bottom: 5px;
+    width: 360px;
+  }
+  @media screen and (max-width: 600px) {
     .box {
-      user-select: none;
+      padding: 0 10px;
     }
     .box.title .cell .shadow {
-      position: absolute;
       margin-top: 4px;
       margin-left: 4px;
-      background-color: #cd5c5c;
       height: 40px;
       width: 40px;
-      z-index: 1;
-      opacity: .5;
     }
-    .box i.icon {
-      margin: 3px;
-      padding: 2px;
-      border: 1px dashed #888;
-    }
-    .box span {
-      border: 0;
-      padding: 5px;
-      margin: 2px 5px;
-      border-bottom: 1px dashed #888;
-      border-radius: 0;
-      background-color: #fff;
-    }
-    .box span.selected {
-      color: #007bff;
-    }
-    .box .inner {
-      margin-bottom: 5px;
-      width: 360px;
+    .icon {
+      width: 32px;
+      height: 32px;
+      background-size: 32px;
     }
   }
 </style>

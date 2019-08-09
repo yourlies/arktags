@@ -15,10 +15,10 @@ export default {
   mounted () {
     switch (true) {
         case window.innerWidth < 1000:
-          this.screenMode = 1;
+          this.$store.commit('common/switchMode', { screenMode: 1 });
           break;
         case window.innerWidth >= 1000:
-          this.screenMode = 0;
+          this.$store.commit('common/switchMode', { screenMode: 0 });
           break;
         default:
           break;
@@ -26,10 +26,10 @@ export default {
     window.onresize = () => {
       switch (true) {
         case window.innerWidth < 1000:
-          this.screenMode = 1;
+          this.$store.commit('common/switchMode', { screenMode: 1 });
           break;
         case window.innerWidth >= 1000:
-          this.screenMode = 0;
+          this.$store.commit('common/switchMode', { screenMode: 0 });
           break;
         default:
           break; 
