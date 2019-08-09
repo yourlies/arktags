@@ -3,7 +3,7 @@
     <TagSearch class="tag-search" v-show="screenMode == 1" />
   	<LeftBar @select="handle" />
   	<RightBar :groups="groups">
-      <Infotip v-show="screenMode == 0" />
+      <Infotip />
     </RightBar>
   </div>
 </template>
@@ -35,7 +35,7 @@ export default {
     this.$store.commit('infotip/create', {
       shake: false,
       count: this.insurCount,
-      content: '点击上方保底按钮/快速双击此处，切换筛选结果为四星以上'
+      content: '点击保底/双击此处，过滤结果为保底'
     });
   }
 }

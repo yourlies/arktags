@@ -1,15 +1,17 @@
 <template>
   <div class="content">
     <div class="cell" ref="cell">
-      #Artificial &nbsp;&nbsp;&nbsp;作者 / 因雨而生
-      <span
-        :key="index"
-        v-for="(btn, index) in buttons"
-        @click="operate(btn)"
-        class="pointer">{{ btn.name }}</span>
+      <div class="cell-box">
+        #Artificial &nbsp;&nbsp;&nbsp;作者 / 因雨而生
+        <span
+          :key="index"
+          v-for="(btn, index) in buttons"
+          @click="operate(btn)"
+          class="pointer">{{ btn.name }}</span>
+      </div>
     </div>
     <div class="inner" @click="gestures">
-      作者の忠言：{{ content }}
+      作者：{{ content }}
     </div>
   </div>
 </template>
@@ -99,7 +101,8 @@
         if (timestamp - this.timestamp < 300) {
           const btn = this.buttons[0];
           this.operate(btn);
-          this.timestamp = 0;          
+          this.shake();
+          this.timestamp = 0;
         } else {
           this.timestamp = timestamp;          
         }
@@ -150,5 +153,18 @@
     box-shadow: 2px 2px 2px #888;
     background-color: #333;
     color: #fff;
+  }
+  @media screen and (max-width: 1000px) {
+    .content {
+      padding: 0;
+      border-left: 0;
+    }
+    .content .cell {
+      padding: 12px 15px;
+      margin: 0 15px;
+    }
+    .content .inner {
+      margin: 0 15px;
+    }
   }
 </style>

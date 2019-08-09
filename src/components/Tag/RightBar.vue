@@ -6,13 +6,15 @@
       :class="['box', group.isTag ? 'reverse' : '']"
       v-for="(group, groupIndex) in groups">
       <div class="cell" v-if="!group.isTag">
-        #Tags
-        <span
-          v-for="(name, index) in group.tagNames"
-          :key="index">
-          {{ name }}
-        </span>
+        <div class="cell-box">
+          #Tags
+          <span
+            v-for="(name, index) in group.tagNames"
+            :key="index">
+            {{ name }}
+          </span>
         </div>
+      </div>
       <div class="inner" v-if="!group.isTag">
         <span
           @click="animate(groupIndex, staff.id)"
@@ -24,7 +26,9 @@
       <div class="cell reverse pointer"
         v-if="group.isTag"
         @click="animateReverse(groupIndex)">
-        #Name &nbsp;&nbsp;&nbsp;{{ group.name }}
+        <div class="cell-box">
+          #Name &nbsp;&nbsp;&nbsp;{{ group.name }}          
+        </div>
       </div>
       <div class="inner reverse pointer"
         v-if="group.isTag"
@@ -106,6 +110,9 @@ export default {
     margin-left: 20px;
     vertical-align: top;
   }
+  .cell-box {
+    display: inline-block;
+  }
   .reverse.box {
     border-left: 5px solid #333;
   }
@@ -160,18 +167,41 @@ export default {
   @media screen and (max-width: 1000px) {
     .rightBar {
       margin: 0;
+      margin-top: 15px;
     }
     .box {
       padding-bottom: 10px;
     }
     .cell {
-      margin-left: 0;
+      margin: 0 15px;
       border-radius: 0;
-      padding: 5px 7px;
-      border-left: 7px solid #cacaca;
+      padding: 8px;
+      padding-left: 10px;
+    }
+    .cell span {
+      margin: 0;
+      margin-right: 10px;
+      border: 0;
+    }
+    .cell-box {
+      padding: 2px;
+      padding-left: 10px;
+      border-left: 2px dashed #fff;
     }
     .inner {
-      padding-left: 5px;
+      padding: 5px 10px;
+    }
+    .inner span {
+      padding: 4px 8px;
+    }
+    .reverse.box {
+      border-left: 0;
+    }
+    .reverse.cell {
+      padding: 10px 15px;
+    }
+    .reverse.inner {
+      margin: 0 10px;
     }
   }
   @media screen and (min-width: 1000px) {
