@@ -182,15 +182,18 @@ export default {
       padding: 0 10px;
     }
     .box.title .cell .shadow {
-      margin-top: 4px;
-      margin-left: 4px;
-      height: 40px;
-      width: 40px;
+      margin-top: 6px;
+      margin-left: 6px;
+      height: 32px;
+      width: 32px;
     }
     .icon {
       width: 32px;
       height: 32px;
       background-size: 32px;
+    }
+    .box .inner {
+      margin-bottom: 0;
     }
   }
 </style>

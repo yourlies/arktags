@@ -1,14 +1,24 @@
 <template>
-  <div class="section" @click="gestures">
-    <span class="pointer" @click="clear">清空</span>
-    <input
-      @blur="search"
-      v-model="inputStaff"
-      placeholder="筛选干员"
-      maxlength="4" />
+  <div>
+    <div class="section" @click="gestures" v-show="screenMode == 0">
+      <span class="pointer" @click="clear">清空</span>
+      <input
+        @blur="search"
+        v-model="inputStaff"
+        placeholder="筛选干员"
+        maxlength="4" />
+    </div>
+    <div class="section" @click="gestures" v-show="screenMode == 1">
+      <div class="logo">
+        <span class="head">公开招募</span>      
+        <span class="foot">计算器</span>
+      </div>
+    </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex';
+
 export default {
   data () {
     return {
@@ -16,6 +26,9 @@ export default {
       inputStaff: '',
     }
   },
+  computed: mapState({
+    screenMode: (state) => state.common.screenMode,
+  }),
   methods: {
     search () {
       if (this.inputStaff != '') {
@@ -79,5 +92,22 @@ export default {
   .touch-area-wrap {
     position: absolute;
     z-index: 2;
+  }
+  @media screen and (max-width: 600px) {
+    .section {
+      border-bottom-left-radius: 10px;
+    }
+    .logo span {
+      padding: 2px 5px;
+      margin: 0;
+      box-shadow: 0 0 0;
+    }
+    .logo span.head {
+      background-color: transparent;
+      color: #fff;
+    }
+    .logo span.foot {
+      border-radius: 2px;
+    }
   }
 </style>
