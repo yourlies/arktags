@@ -95,7 +95,7 @@ export default {
   }
   @media screen and (max-width: 600px) {
     .section {
-      border-bottom-left-radius: 10px;
+      border-bottom-left-radius: 0;
     }
     .logo span {
       padding: 2px 5px;

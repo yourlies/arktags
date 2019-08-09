@@ -168,7 +168,7 @@ export default {
       margin-left: 0;
       border-radius: 0;
       padding: 5px 7px;
-      border-left: 8px solid #bfbfbf;
+      border-left: 7px solid #cacaca;
     }
     .inner {
       padding-left: 5px;
