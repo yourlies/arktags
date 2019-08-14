@@ -197,7 +197,12 @@ export default {
     .reverse.box {
       border-left: 0;
     }
+    .reverse.inner span {
+      background-color: #444;
+    }
     .reverse.cell {
+      box-shadow: 1px 1px 1px #888;
+      background-color: #444;
       padding: 10px 15px;
     }
     .reverse.inner {

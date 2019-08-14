@@ -3,6 +3,7 @@
     <div class="cell" ref="cell">
       <div class="cell-box">
         #Artificial &nbsp;&nbsp;&nbsp;作者 / 因雨而生
+        <span class="pointer" @click="clear">清空</span>
         <span
           :key="index"
           v-for="(btn, index) in buttons"
@@ -106,6 +107,9 @@
         } else {
           this.timestamp = timestamp;          
         }
+      },
+      clear () {
+        this.$store.commit('group/clear');
       }
     },
     mounted () {
@@ -127,6 +131,7 @@
     padding: 0;
     border: 0;
     margin: 0;
+    margin-right: 5px;
     background-color: transparent;
   }
   .content .ball {
@@ -149,17 +154,14 @@
     min-height: 44px;
     user-select: none;
   }
-  .content .inner span {
-    box-shadow: 2px 2px 2px #888;
-    background-color: #333;
-    color: #fff;
-  }
   @media screen and (max-width: 1000px) {
     .content {
       padding: 0;
       border-left: 0;
     }
     .content .cell {
+      background-color: #444;
+      box-shadow: 1px 1px 1px #888;
       padding: 12px 15px;
       margin: 0 15px;
     }
